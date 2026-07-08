@@ -1,8 +1,7 @@
-name: Build Kotlin APK
+name: Mobile APK Builder
 
 on:
-  push:
-    branches: [ main, master ] # يعمل عند الرفع على فرع main أو master
+  workflow_dispatch:
 
 jobs:
   build:
@@ -12,24 +11,22 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    # مشاريع كوتلين الحديثة تتطلب غالباً Java 17 أو Java 21
-    - name: Set up JDK 17
+    # تم التحديث إلى جافا 21 لتوافقية أفضل مع مشاريع كوتلين الجديدة
+    - name: Set up JDK 21
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
-        java-version: '17' 
+        java-version: '21'
 
-    # منح صلاحية التنفيذ لملف الـ Gradle الخاص بالمشروع
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    # تشغيل أمر بناء نسخة الـ APK التجريبية
+    # تشغيل البناء مع ميزة عرض تفاصيل الأخطاء في حال فشل مجدداً
     - name: Build Debug APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleDebug --stacktrace
 
-    # رفع ملف الـ APK الناتج لتتمكن من تحميله
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: kotlin-app-debug
+        name: My-Kotlin-App
         path: app/build/outputs/apk/debug/app-debug.apk
