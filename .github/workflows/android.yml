@@ -11,19 +11,21 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    # تم التحديث إلى جافا 21 لتوافقية أفضل مع مشاريع كوتلين الجديدة
-    - name: Set up JDK 21
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         distribution: 'zulu'
-        java-version: '21'
+        java-version: '17'
+        cache: 'gradle' # تفعيل التخزين المؤقت لتفادي أخطاء التحميل
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    # تشغيل البناء مع ميزة عرض تفاصيل الأخطاء في حال فشل مجدداً
+    # تم إضافة خيار تفصيل الأخطاء وعزل الذاكرة المتعارضة
     - name: Build Debug APK
-      run: ./gradlew assembleDebug --stacktrace
+      run: ./gradlew assembleDebug --stacktrace -Dorg.gradle.jvmargs="-Xmx2048m -XX:MaxMetaspaceSize=512m"
+      env:
+        JAVA_HOME: ${{ env.JAVA_HOME_17_X64 }}
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
