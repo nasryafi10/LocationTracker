@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "353839402819",
+    "project_id": "locationtracker-25a7a",
+    "storage_bucket": "locationtracker-25a7a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:353839402819:android:7486a38e6043d06aa9e9f6",
+        "android_client_info": {
+          "package_name": "com.lahsuak.apps.locationtracker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-WqcverSTRjfNxzi2YaVfkGV3YLV6g0Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
